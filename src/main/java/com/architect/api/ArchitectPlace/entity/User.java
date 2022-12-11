@@ -5,14 +5,17 @@ import com.architect.api.ArchitectPlace.entity.enums.UserStatus;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
-@Table(name = "usr")
-public class User {
+@Table(name = "usr", indexes = {@Index(name = "gender_fk_index", columnList = "gender_id")})
+@EqualsAndHashCode(of = "username")
+@ToString(exclude = {"gender", "project"})
+public class User extends AuditEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +25,7 @@ public class User {
 
     private String email;
 
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
 
     private Integer age;
@@ -29,9 +33,12 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private UserStatus userStatus;
 
-    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name = "gender_id")
     private Gender gender;
 
+    @OneToMany(mappedBy = "user")
+    private List<Project> projects;
 
 
 }
