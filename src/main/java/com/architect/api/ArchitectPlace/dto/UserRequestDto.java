@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class UserRequestDto {
 
-    private User username;
+    private String username;
 
     private String password;
 
@@ -17,6 +17,6 @@ public class UserRequestDto {
 
     private Integer age;
 
-    private String genderName;
+    private Gender gender;
 
 }

@@ -48,7 +48,7 @@ public class UserService {
                 .orElseThrow(ArithmeticException::new);
     }
 
-    
+
     List<UserResponseDto> findAll() {
         return userRepo.findAll()
                 .stream()

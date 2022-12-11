@@ -20,7 +20,7 @@ public class UserResponseDto {
 
     private UserStatus userStatus;
 
-    private Gender gender;
+    private String genderName;
 
     private List<Project> projects;
 
